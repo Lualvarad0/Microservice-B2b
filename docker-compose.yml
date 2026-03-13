@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_b2b
+    restart: always
+    environment:
+      POSTGRES_DB: backoffice_b2b
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  customers-api:
+    build: ./customers-api
+    container_name: customers_api
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+    env_file:
+      - ./customers-api/.env
+
+  orders-api:
+    build: ./orders-api
+    container_name: orders_api
+    ports:
+      - "3002:3002"
+    depends_on:
+      - postgres
+      - customers-api
+    env_file:
+      - ./orders-api/.env
+
+  lambda-orchestrator:
+    build: ./lambda-orchestrator
+    container_name: lambda_orchestrator
+    ports:
+      - "3003:3003"
+    depends_on:
+      - customers-api
+      - orders-api
+    env_file:
+      - ./lambda-orchestrator/.env
+    command: npm run dev
+
+volumes:
+  postgres_data:

@@ -1,0 +1,40 @@
+service: lambda-orchestrator
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  stage: ${env:STAGE, 'dev'}
+  region: us-east-1
+  timeout: 30
+  memorySize: 256
+  environment:
+    APP_NAME: ${env:APP_NAME}
+    NODE_ENV: ${env:NODE_ENV}
+    PORT: ${env:PORT}
+    STAGE: ${env:STAGE}
+    CUSTOMERS_API_BASE_URL: ${env:CUSTOMERS_API_BASE_URL}
+    ORDERS_API_BASE_URL: ${env:ORDERS_API_BASE_URL}
+    CUSTOMERS_API_TIMEOUT_MS: ${env:CUSTOMERS_API_TIMEOUT_MS}
+    ORDERS_API_TIMEOUT_MS: ${env:ORDERS_API_TIMEOUT_MS}
+    LOG_LEVEL: ${env:LOG_LEVEL}
+
+plugins:
+  - serverless-offline
+
+functions:
+  api:
+    handler: src/lambda.handler
+    events:
+      - httpApi:
+          path: /
+          method: any
+      - httpApi:
+          path: /{proxy+}
+          method: any
+
+custom:
+  serverless-offline:
+    httpPort: ${env:PORT, 3003}
+    host: 0.0.0.0
