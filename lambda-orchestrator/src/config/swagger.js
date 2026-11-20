@@ -10,10 +10,7 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url:
-        env.nodeEnv === "development"
-          ? `http://localhost:${env.port}`
-          : ""
+      url: env.nodeEnv === "development" ? `http://localhost:${env.port}` : ""
     }
   ]
 };

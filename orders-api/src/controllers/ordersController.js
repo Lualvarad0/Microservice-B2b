@@ -23,10 +23,7 @@ export async function listOrdersController(req, res) {
 }
 
 export async function confirmOrderController(req, res) {
-  const result = await confirmOrderService(
-    req.params.id,
-    req.headers["x-idempotency-key"]
-  );
+  const result = await confirmOrderService(req.params.id, req.headers["x-idempotency-key"]);
 
   res.status(result.statusCode).json(result.body);
 }

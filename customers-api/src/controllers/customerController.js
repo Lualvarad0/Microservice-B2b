@@ -35,9 +35,7 @@ export async function getInternalCustomerByIdController(req, res) {
 }
 
 export async function listCustomersController(req, res) {
-  const limit = req.query.limit
-    ? parsePositiveInt(req.query.limit, "limit")
-    : undefined;
+  const limit = req.query.limit ? parsePositiveInt(req.query.limit, "limit") : undefined;
 
   const result = await listCustomersService({
     search: req.query.search,

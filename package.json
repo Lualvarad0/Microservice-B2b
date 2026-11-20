@@ -1,0 +1,19 @@
+{
+  "name": "b2b-backoffice",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Linting and formatting tooling for the Backoffice B2B microservices (customers-api, orders-api, lambda-orchestrator)",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1"
+  }
+}

@@ -6,7 +6,12 @@ export function sendSuccess(res, data, message = "OK", statusCode = 200) {
   });
 }
 
-export function sendError(res, message = "Internal Server Error", statusCode = 500, details = null) {
+export function sendError(
+  res,
+  message = "Internal Server Error",
+  statusCode = 500,
+  details = null
+) {
   return res.status(statusCode).json({
     success: false,
     message,

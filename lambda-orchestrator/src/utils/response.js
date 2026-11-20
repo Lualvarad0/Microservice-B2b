@@ -23,10 +23,7 @@ export function validateCreateAndConfirmOrderPayload(body) {
       typeof item.quantity !== "number" ||
       item.quantity <= 0
     ) {
-      throw new AppError(
-        "Each item must contain product_id and quantity > 0",
-        400
-      );
+      throw new AppError("Each item must contain product_id and quantity > 0", 400);
     }
   }
 

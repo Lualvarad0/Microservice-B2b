@@ -34,7 +34,8 @@ export async function updateProductService(id, payload) {
 
   if (payload.sku !== undefined) updates.sku = ensureRequiredString(payload.sku, "sku", 100);
   if (payload.name !== undefined) updates.name = ensureRequiredString(payload.name, "name", 150);
-  if (payload.description !== undefined) updates.description = ensureOptionalString(payload.description, "description", 2000);
+  if (payload.description !== undefined)
+    updates.description = ensureOptionalString(payload.description, "description", 2000);
   if (payload.price !== undefined) updates.price = ensurePositiveNumber(payload.price, "price");
   if (payload.stock !== undefined) updates.stock = ensureNonNegativeInteger(payload.stock, "stock");
   if (payload.active !== undefined) updates.active = Boolean(payload.active);
