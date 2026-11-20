@@ -11,7 +11,7 @@ export async function getCustomerById(customerId) {
   try {
     const response = await customersApi.get(`/internal/customers/${customerId}`, {
       headers: {
-        Authorization: `Bearer ${env.service.token}`
+        "x-service-token": env.service.token
       }
     });
 

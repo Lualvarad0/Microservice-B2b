@@ -11,5 +11,8 @@ export const env = {
   ordersApiBaseUrl: process.env.ORDERS_API_BASE_URL,
   customersApiTimeoutMs: Number(process.env.CUSTOMERS_API_TIMEOUT_MS || 5000),
   ordersApiTimeoutMs: Number(process.env.ORDERS_API_TIMEOUT_MS || 5000),
+  serviceToken: process.env.SERVICE_TOKEN,
+  ordersApiAuthUsername: process.env.ORDERS_API_AUTH_USERNAME,
+  ordersApiAuthPassword: process.env.ORDERS_API_AUTH_PASSWORD,
   logLevel: process.env.LOG_LEVEL || "info"
 };

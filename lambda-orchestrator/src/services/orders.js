@@ -6,11 +6,6 @@ export async function createOrder(payload, headers = {}) {
 }
 
 export async function confirmOrder(orderId, headers = {}) {
-  try {
-    const response = await httpOrders.patch(`/orders/${orderId}/confirm`, {}, { headers });
-    return response.data;
-  } catch (error) {
-    const response = await httpOrders.post(`/orders/${orderId}/confirm`, {}, { headers });
-    return response.data;
-  }
+  const response = await httpOrders.post(`/orders/${orderId}/confirm`, {}, { headers });
+  return response.data;
 }
