@@ -21,6 +21,7 @@ jobs:
   install:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         service: [customers-api, orders-api, lambda-orchestrator]
     steps:
@@ -35,6 +36,7 @@ jobs:
   docker-build:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         service: [customers-api, orders-api, lambda-orchestrator]
     steps:
