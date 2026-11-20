@@ -24,10 +24,4 @@ OrderItem.belongsTo(Product, {
   as: "product"
 });
 
-export {
-  sequelize,
-  Product,
-  Order,
-  OrderItem,
-  IdempotencyKey
-};
+export { sequelize, Product, Order, OrderItem, IdempotencyKey };

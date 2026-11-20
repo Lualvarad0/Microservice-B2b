@@ -1,24 +1,19 @@
 import { Sequelize } from "sequelize";
 import { env } from "./env.js";
 
-export const sequelize = new Sequelize(
-  env.db.name,
-  env.db.user,
-  env.db.password,
-  {
-    host: env.db.host,
-    port: env.db.port,
-    dialect: "postgres",
-    logging: env.db.logging ? console.log : false,
-    define: {
-      freezeTableName: true,
-      underscored: true,
-      timestamps: true,
-      createdAt: "created_at",
-      updatedAt: "updated_at"
-    }
+export const sequelize = new Sequelize(env.db.name, env.db.user, env.db.password, {
+  host: env.db.host,
+  port: env.db.port,
+  dialect: "postgres",
+  logging: env.db.logging ? console.log : false,
+  define: {
+    freezeTableName: true,
+    underscored: true,
+    timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at"
   }
-);
+});
 
 export async function connectWithRetry() {
   let attempt = 0;
@@ -38,9 +33,7 @@ export async function connectWithRetry() {
         throw error;
       }
 
-      await new Promise((resolve) =>
-        setTimeout(resolve, env.db.retryDelayMs)
-      );
+      await new Promise((resolve) => setTimeout(resolve, env.db.retryDelayMs));
     }
   }
 }

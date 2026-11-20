@@ -3,10 +3,7 @@ import { AppError } from "../utils/appError.js";
 import { signJwt } from "../utils/jwt.js";
 
 export function login(username, password) {
-  if (
-    username !== env.auth.username ||
-    password !== env.auth.password
-  ) {
+  if (username !== env.auth.username || password !== env.auth.password) {
     throw new AppError("Invalid credentials", 401);
   }
 

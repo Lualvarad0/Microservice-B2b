@@ -47,10 +47,7 @@ export async function getInternalCustomerByIdService(id) {
 }
 
 export async function listCustomersService({ search, cursor, limit }) {
-  const safeLimit = Math.min(
-    limit || env.pagination.defaultLimit,
-    env.pagination.maxLimit
-  );
+  const safeLimit = Math.min(limit || env.pagination.defaultLimit, env.pagination.maxLimit);
 
   const cursorId = cursor ? decodeCursor(cursor) : null;
 
@@ -66,9 +63,7 @@ export async function listCustomersService({ search, cursor, limit }) {
 
   const hasNextPage = rows.length > safeLimit;
   const items = hasNextPage ? rows.slice(0, safeLimit) : rows;
-  const nextCursor = hasNextPage
-    ? encodeCursor(items[items.length - 1].id)
-    : null;
+  const nextCursor = hasNextPage ? encodeCursor(items[items.length - 1].id) : null;
 
   return {
     items,

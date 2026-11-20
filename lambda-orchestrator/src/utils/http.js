@@ -26,9 +26,7 @@ let ordersApiTokenCache = null;
 
 function decodeJwtExpiryMs(token) {
   try {
-    const payload = JSON.parse(
-      Buffer.from(token.split(".")[1], "base64url").toString("utf8")
-    );
+    const payload = JSON.parse(Buffer.from(token.split(".")[1], "base64url").toString("utf8"));
     return payload.exp ? payload.exp * 1000 : null;
   } catch {
     return null;
@@ -60,8 +58,7 @@ async function fetchOrdersApiToken() {
 }
 
 async function getOrdersApiToken() {
-  const isExpiringSoon =
-    !ordersApiTokenCache || ordersApiTokenCache.expiresAt - Date.now() < 5000;
+  const isExpiringSoon = !ordersApiTokenCache || ordersApiTokenCache.expiresAt - Date.now() < 5000;
 
   return isExpiringSoon ? fetchOrdersApiToken() : ordersApiTokenCache.token;
 }
@@ -77,8 +74,7 @@ function handleHttpError(error) {
   }
 
   const statusCode = error.response?.status || 502;
-  const message =
-    error.response?.data?.message || error.message || "Upstream service error";
+  const message = error.response?.data?.message || error.message || "Upstream service error";
 
   throw new AppError(message, statusCode, error.response?.data || null);
 }
