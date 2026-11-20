@@ -10,15 +10,18 @@ provider:
   timeout: 30
   memorySize: 256
   environment:
-    APP_NAME: ${env:APP_NAME}
-    NODE_ENV: ${env:NODE_ENV}
-    PORT: ${env:PORT}
-    STAGE: ${env:STAGE}
-    CUSTOMERS_API_BASE_URL: ${env:CUSTOMERS_API_BASE_URL}
-    ORDERS_API_BASE_URL: ${env:ORDERS_API_BASE_URL}
-    CUSTOMERS_API_TIMEOUT_MS: ${env:CUSTOMERS_API_TIMEOUT_MS}
-    ORDERS_API_TIMEOUT_MS: ${env:ORDERS_API_TIMEOUT_MS}
-    LOG_LEVEL: ${env:LOG_LEVEL}
+    APP_NAME: ${env:APP_NAME, 'lambda-orchestrator'}
+    NODE_ENV: ${env:NODE_ENV, 'development'}
+    PORT: ${env:PORT, '3003'}
+    STAGE: ${env:STAGE, 'dev'}
+    CUSTOMERS_API_BASE_URL: ${env:CUSTOMERS_API_BASE_URL, 'http://localhost:3001'}
+    ORDERS_API_BASE_URL: ${env:ORDERS_API_BASE_URL, 'http://localhost:3002'}
+    CUSTOMERS_API_TIMEOUT_MS: ${env:CUSTOMERS_API_TIMEOUT_MS, '5000'}
+    ORDERS_API_TIMEOUT_MS: ${env:ORDERS_API_TIMEOUT_MS, '5000'}
+    SERVICE_TOKEN: ${env:SERVICE_TOKEN}
+    ORDERS_API_AUTH_USERNAME: ${env:ORDERS_API_AUTH_USERNAME}
+    ORDERS_API_AUTH_PASSWORD: ${env:ORDERS_API_AUTH_PASSWORD}
+    LOG_LEVEL: ${env:LOG_LEVEL, 'info'}
 
 plugins:
   - serverless-offline

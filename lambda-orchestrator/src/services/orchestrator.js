@@ -23,15 +23,17 @@ export async function createAndConfirmOrderFlow(payload) {
     throw new AppError("Customer not found", 404);
   }
 
-  if (customer.deleted_at) {
+  if (customer.deletedAt) {
     throw new AppError("Customer is inactive or deleted", 409);
   }
 
   const orderResponse = await createOrder(
     {
-      customer_id,
-      items,
-      idempotency_key
+      customerId: customer_id,
+      items: items.map((item) => ({
+        productId: item.product_id,
+        quantity: item.quantity
+      }))
     },
     headers
   );
